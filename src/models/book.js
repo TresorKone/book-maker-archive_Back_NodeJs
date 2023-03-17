@@ -17,9 +17,9 @@ const bookSchema = new Schema({
     },
     date: {
         type: String,
-        required: true
+        required: false
     },
-    author: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
