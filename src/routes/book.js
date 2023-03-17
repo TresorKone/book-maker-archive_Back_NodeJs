@@ -17,7 +17,17 @@ router.post('/add', jwtCheck, bookController.postAddBook);
 // PATCH /book/edit/:id
 router.patch('/edit/:bookId', jwtCheck, bookController.postEditBook);
 
-// PATCH /book/delete/:id
+// DELETE /book/delete/:id
 router.delete('/delete/:bookId', jwtCheck, bookController.postDeleteBook);
+
+// PATCH /book/liked/:id
+router.patch('/liked/:bookId', jwtCheck, bookController.likeButton);
+
+// GET /book/getLikes/:id
+router.get('/getLikes/:bookId', bookController.getLikes);
+
+//PATCH /book/unlike/:id
+router.patch('/unlike/:bookId', jwtCheck, bookController.unlikeButton);
+
 
 module.exports = router;

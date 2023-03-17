@@ -139,3 +139,63 @@ exports.postDeleteBook = (req, res, next) => {
             res.status(500).json('book not deleted, there might be some errors on the back side');
         })
 };
+
+exports.likeButton = (req, res, next) => {
+    const id = req.params.bookId;
+    const userWhoLiked = req.userId;
+
+
+    Book.findByIdAndUpdate(id, {
+        $push:{likes:userWhoLiked}
+    }, { new:true })
+        .then(book => {
+            return res.status(200).json('post ' + book.title + ' liked')
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json('server error');
+            next(err);
+        })
+};
+
+exports.getLikes = (req, res, next) => {
+    const id = req.params.bookId;
+    let likesArray;
+
+    Book.findById(id)
+        .then(book => {
+            if (id === undefined) {
+                return res.status.json('there are no book with this id in the database');
+            }
+
+            // The front side can now use a "count" or "length" like method do displays de number of likes
+            return likesArray = book.likes;
+        })
+        .then(r => {
+            res.status(200).json({
+                data: r.length,
+                message: 'data fetched'
+            })
+        })
+        .catch(err => {
+            res.status(500).json('error server');
+            next(err);
+        })
+};
+
+exports.unlikeButton = (req, res, next) => {
+    const id = req.params.bookId;
+
+    Book.findByIdAndUpdate(id, {
+        $pull: {likes: req.body.userId }
+    }, { new:true, upsert: true })
+        .then(book => {
+            return res.status(200).json('post ' + book.title + ' unliked')
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json('server error');
+            next(err);
+        })
+
+};
