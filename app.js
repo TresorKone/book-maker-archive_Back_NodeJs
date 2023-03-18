@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const db_URI = require('./src/config/db_URI');
 const userRoutes = require('./src/routes/auth');
 const bookRoutes = require('./src/routes/book');
+const profileRoutes = require('./src/routes/profile');
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 app.use('/auth', userRoutes);
 app.use('/book', bookRoutes);
+app.use('/profile', profileRoutes);
 
 mongoose.connect(db_URI.URI)
     .then(r => {
