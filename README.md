@@ -2,7 +2,7 @@
 
   - This is an REST FULL API design for the front side of the project of the same name.
   - This Api is developed in node js and the framework express and is conform of most importantly security system like the hashed of password with "extra salt" and the set up of a JWT Token.
-  - It is also important to note that for stacking my data i use mongoDb which is noSQl and schemaless database, which means that I can store my data in a very flexible way.
+  - It is also important to note that for stacking my data i use mongoDb which is noSQL and schemaless database, which means that I can store my data in a very flexible way.
 
 ### notes
 
