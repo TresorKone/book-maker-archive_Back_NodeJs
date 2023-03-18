@@ -31,10 +31,12 @@ exports.postSignup = (req, res, next) => {
                         .catch(err => {
                             console.log(err);
                             res.status(500).send('error when saving user');
+                            next(err);
                         })
                 } catch (e) {
                     console.log(e);
-                    res.status(500).send('something my be broke')
+                    res.status(500).send('something my be broke');
+                    next(e);
                 }
             }
 
@@ -86,5 +88,6 @@ exports.postLogin = (req, res, next) => {
     } catch (e) {
         console.log(e);
         res.status(500).send('something my be broke')
+        next(e);
     }
 };

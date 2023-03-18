@@ -14,7 +14,8 @@ exports.getIndex = (req, res, next) => {
 
             res.status(400).json({
                 message: "no books in the database"
-            })
+            });
+            next(err);
         })
 };
 
@@ -40,6 +41,7 @@ exports.getBook = (req, res, next) => {
             res.status(400).json({
                 message: "no book fetched"
             })
+            next(err);
         })
 };
 
@@ -76,6 +78,7 @@ exports.postAddBook = (req, res, next) => {
             res.status(500).json({
                 message: 'book not added'
             });
+            next(err);
         });
 };
 
@@ -111,6 +114,7 @@ exports.postEditBook = (req, res, next) => {
             res.status(400).json({
                 message: 'book not edited',
             })
+            next(err);
         })
 };
 
@@ -137,6 +141,7 @@ exports.postDeleteBook = (req, res, next) => {
         .catch(err => {
             console.log(err)
             res.status(500).json('book not deleted, there might be some errors on the back side');
+            next(err);
         })
 };
 
