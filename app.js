@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
-const db_URI = require('./src/config/db_URI');
+
+//const db_URI = require('./src/config/db_URI');
 const userRoutes = require('./src/routes/auth');
 const bookRoutes = require('./src/routes/book');
 const profileRoutes = require('./src/routes/profile');
@@ -14,13 +16,17 @@ const app = express();
 app.use(bodyParser.json());
 
 
-//CORS
+// CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
+// helmet header
+app.use(helmet());
+
 
 app.use('/auth', userRoutes);
 app.use('/book', bookRoutes);
