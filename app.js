@@ -27,7 +27,6 @@ app.use((req, res, next) => {
 // helmet header
 app.use(helmet());
 
-
 app.use('/auth', userRoutes);
 app.use('/book', bookRoutes);
 app.use('/profile', profileRoutes);
